@@ -1,0 +1,810 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Vim 模式</title>
+  <style type="text/css">
+    body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
+  font-size: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: #f7f7f7;
+}
+
+.slide-content {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  margin: 80px auto 0 auto;
+  padding: 30px;
+
+  font-weight: 200;
+  font-size: 200%;
+  line-height: 1.375;
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0; height: 0;
+  border: 30px solid #333;
+  float: left;
+  margin-right: 30px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+
+  border-left-width: 50px;
+  border-right-width: 0;
+}
+
+.prev:hover {
+  border-right-color: #888;
+  cursor: pointer;
+}
+
+.next:hover {
+  border-left-color: #888;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 300%;
+  line-height: 1.2;
+  text-align: center;
+  margin: 170px 0 0;
+}
+
+h2 {
+  font-size: 100%;
+  line-height: 1.2;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 140%;
+  line-height: 1.2;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  line-height: 1.375;
+}
+
+.author h1 {
+  font-size: 170%;
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 95%;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: #44a4dd;
+}
+
+a:hover {
+  color: #66b5ff;
+}
+
+pre {
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 1;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background-color: #b4b4b4;
+
+  -webkit-transition: width 0.05s ease-out;
+  -moz-transition: width 0.05s ease-out;
+  -o-transition: width 0.05s ease-out;
+  transition: width 0.05s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+
+  body {
+    font-size: 70%;
+  }
+
+  .slide-content {
+    width: auto;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 120px;
+  }
+
+  .prev, .prev:hover {
+    border-right-color: rgba(135, 135, 135, 0.5);
+  }
+
+  .next, .next:hover {
+    border-left-color: rgba(135, 135, 135, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 50%;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    padding: 10px;
+    margin-top: 10px;
+    height: 340px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+
+  @page {
+    size: letter;
+  }
+
+  .hidden {
+    display: inline;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body {
+    margin: 0 auto !important;
+    border: 0;
+    padding: 0;
+    float: none !important;
+    overflow: visible;
+    background: none !important;
+    font-size: 52%;
+  }
+
+  .progress, .controls {
+    display: none;
+  }
+
+  .slide {
+    position: static;
+  }
+
+  .slide-content {
+    border: 1px solid #222;
+    margin-top: 0;
+    margin-bottom: 40px;
+    height: 3.5in;
+    overflow: visible;
+  }
+
+  .slide:nth-child(even) {
+    /* 2 slides per page */
+    page-break-before: always;
+  }
+}
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+
+  </style>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="slide" id="slide-1">
+    <section class="slide-content"><h1 id="vim-">Vim 模式</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-2">
+    <section class="slide-content"><h3 id="-">模式</h3>
+<p><strong>四种模式</strong></p>
+<ol>
+<li>正常模式（normal-mode）</li>
+<li>插入模式（insert-mode）</li>
+<li>命令模式（command-mode）</li>
+<li>可视模式（visual-mode）</li>
+</ol>
+<p><strong>可视模式的三种子模式</strong></p>
+<ol>
+<li>字符操作（VISUAL）</li>
+<li>行操作（VISUAL LINE）</li>
+<li>块操作（VISUAL BLOCK）</li>
+</ol>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-3">
+    <section class="slide-content"><h3 id="-">模式切换</h3>
+<pre><code> +----------+
+ |          |
+ |  command |
+ |          |
+ +---+--^---+
+     |  |
+ Esc |  |
+     |  | :
+Enter|  |
+     |  |
+ +---v--+---+           Esc           +----------+
+ |          &lt;-------------------------+          |
+ |  normal  |                         |  insert  |
+ |          +-------------------------&gt;          |
+ +---^--+---+       i,a,I,A,o,O       +----------+
+     |  |           s,S,cc,c,C...
+     |  | v
+ Esc |  | Shift + v
+     |  | Ctrl + v
+     |  |
+ +---+--v---+
+ |          |
+ |  visual  |
+ |          |
+ +----------+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-4">
+    <section class="slide-content"><h3 id="-">正常模式</h3>
+<ul>
+<li>移动光标</li>
+<li>滚动屏幕</li>
+<li>增删改查</li>
+<li>组合操作</li>
+</ul>
+<p>狂按 Esc 键就能回到正常模式！！！</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-5">
+    <section class="slide-content"><h3 id="-">正常模式-移动光标</h3>
+<p><strong>字符移动</strong></p>
+<pre><code>  k                             上
+h   l                         左  右
+  j                             下
+
+  0                             到本行行头
+  $                             到本行行尾
+  ^                             到本行第一个非 blank 字符
+  g_                            到本行最后一个非 blank 字符
+
+  w                             到下一个单词的开头
+  b                             到上一个单词的开头
+  e                             到下一个单词的末尾
+
+  *                             到下一个匹配单词
+  #                             到上一个匹配单词
+  %                             匹配括号移动
+
+  f[x]                          到下一个为 x 的字符处
+  t[x]                          到下一个为 x 的字符前
+
+  ``                            来回跳转两个位置
+  C-o                           返回最近停留的一个位置</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-6">
+    <section class="slide-content"><h3 id="-">正常模式-移动光标</h3>
+<p><strong>行移动</strong></p>
+<pre><code>  gg                            跳转到顶行
+  [n]G                          跳转到第几行
+  G                             跳转到末行
+
+  H                             当前屏幕最上行
+  M                             当前屏幕中间行
+  L                             当前屏幕最下行
+
+  (                             前移 1 句
+  )                             后移 1 句
+  {                             前移 1 段
+  }                             后移 1 段</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-7">
+    <section class="slide-content"><h3 id="-">正常模式-滚动屏幕</h3>
+<p><strong>滚动和翻页</strong></p>
+<pre><code>  zt                            将当前行移动到屏幕顶端
+  zz                            将当前行移动到屏幕中央
+  zb                            将当前行移动到屏幕底端
+
+  C-e                           下翻一行
+  C-y                           上翻一行
+
+  C-d                           下翻半屏
+  C-u                           上翻半屏
+
+  C-f                           下翻一屏
+  C-b                           上翻一屏</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-8">
+    <section class="slide-content"><h3 id="-">正常模式-增删改查</h3>
+<p><strong>字符操作</strong></p>
+<pre><code>  x                             删除一个字符
+  s                             删除一个字符，并且进入插入模式
+  r                             替换一个字符
+  ~                             大小写转换一个字符
+  C-a                           数字加一</code></pre>
+<p><strong>单词操作</strong></p>
+<pre><code>  g~                            大小写转换
+  gU                            变大写
+  gu                            变小写</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><h3 id="-">正常模式-增删改查</h3>
+<p><strong>行操作</strong></p>
+<pre><code>  D                             删除到行尾
+  C                             删除到行尾，并且进入插入模式
+  S                             修改行
+  cc                            修改行，并且自动缩进
+
+  dd                            剪切行
+  yy                            复制行
+  p,P                           粘贴
+  C-;                           查看粘贴板
+
+  &gt;&gt;                            向前缩进
+  &lt;&lt;                            向后缩进</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h3 id="-">正常模式-增删改查</h3>
+<p><strong>其它</strong></p>
+<pre><code>  u                             撤销
+  C-r                           重做
+  .                             重复上一个命令
+
+  K                             查找光标所在单词的手册
+  ZZ                            保存退出vi
+  C-z                           中断
+  fg                            恢复</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h3 id="-">正常模式-组合操作</h3>
+<p><strong>组合</strong></p>
+<pre><code>  [action] [position]
+  [action] i, a [object]
+  [count] [command]</code></pre>
+<p><strong>例如</strong></p>
+<pre><code>  action                剪切（d），复制（y），修改（c）
+  position              单词(w)，行尾（$），文章结尾（G）等
+  object                单词（w）， 句（s）， 段(p)， 引号括号（&quot;&quot;, &#39;&#39;, (), [], {}）等
+  count                 数字
+  command               删除行(dd)，移动一个单词（w）</code></pre>
+<pre><code>  dw                    删除一个单词
+  dG                    删除文章结尾
+  di(                   删除括号内的内容
+  4dd                   删除四行
+  4w                    移动四个单词
+  d4w                   删除四个单词
+
+  更多...</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h3 id="-">可视模式</h3>
+<p><strong>子模式</strong></p>
+<pre><code>  v                             进入字符操作子模式
+  V                             进入行操作子模式
+  C-v                           进入块操作子模式</code></pre>
+<p><strong>其它</strong></p>
+<pre><code>  =                             格式化代码</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h3 id="-">插入模式</h3>
+<p><strong>补全</strong></p>
+<pre><code>  C-n                           向下选择
+  C-p                           向上选择</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h3 id="-">命令模式</h3>
+<p><strong>分屏</strong></p>
+<pre><code>  :sp                           上下分屏
+  :vsp                          左右分屏
+  :Sex                          上下分屏，浏览目录
+  :Vex                          左右分屏，浏览目录
+
+  C-w  =,+,-                    平分，增大，减小
+  C-w  h,j,k,l                  向左，下，上，右移动
+
+  C-w  s                        上下分割当前文件
+  C-w  c                        关闭</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-15">
+    <section class="slide-content"><h3 id="-">命令模式</h3>
+<p><strong>查找</strong></p>
+<pre><code>  :/string                      正向查找
+  :?string                      反向查找
+  n                             查找下一个</code></pre>
+<p><strong>替换</strong></p>
+<pre><code>  :[位置1[,位置2]]s/[旧内容]/[新内容]/[标记]
+
+  :s/old/new                    替换
+  :1,$ s/str1/str2/             用str2替换正文中首次出现的str1
+  :%s/old/new/giC               % 所有行；g 所有匹配项；i 忽略大小写；c  确认信息</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-16">
+    <section class="slide-content"><h3 id="-">命令模式</h3>
+<p><strong>文件</strong></p>
+<pre><code>  :w                            保存
+  :wq                           保存退出
+  :z                            保存退出
+  :q!                           不保存退出
+
+  :w [file]                     另存为
+  :a,bw [file]                  将第a行至第b行写入file文件
+  :r [file]                     读取fle文件的内容，插入当前光标所在行的后面
+  :e [file]                     编辑新文件
+  :f [file]                     重命名文件
+  :f                            输出当前文件名称和状态
+  :sav &lt;path/to/file&gt;           另存为
+  :bn                           下一个文件
+  :bp                           上一个文件
+  :n                            下一个文件
+  :recover                      上次编辑意外退出，从临时文件恢复文件内容(该文件以.开头，并以.swp 结尾)</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-17">
+    <section class="slide-content"><h3 id="-">命令模式</h3>
+<p><strong>Shell  命令</strong></p>
+<pre><code>  :![command]                   无需退出vi即可执行linux命令
+  :r ![command]                 导入命令执行结果：</code></pre>
+<p><strong>设置选项</strong></p>
+<pre><code>  :set number
+
+  更多...</code></pre>
+<p><strong>其它</strong></p>
+<pre><code>  :n
+  :help</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-18">
+    <section class="slide-content"><h1 id="-">谢谢</h1>
+</section>
+  </div>
+  <div class="slide hidden author-slide" id="slide-19">
+    <section class="slide-content"><div class="author">
+  <h1 class="name">modood</h1>
+    <h3 class="url">
+      <a href="https://github.com/modood">https://github.com/modood</a>
+    </h3>
+</div>
+</section>
+  </div>
+
+  <div class="controls">
+    <div class="arrow prev"></div>
+    <div class="arrow next"></div>
+  </div>
+
+
+  <script type="text/javascript">
+    /**
+ * Returns the current page number of the presentation.
+ */
+function currentPosition() {
+  return parseInt(document.querySelector('.slide:not(.hidden)').id.slice(6));
+}
+
+
+/**
+ * Navigates forward n pages
+ * If n is negative, we will navigate in reverse
+ */
+function navigate(n) {
+  var position = currentPosition();
+  var numSlides = document.getElementsByClassName('slide').length;
+
+  /* Positions are 1-indexed, so we need to add and subtract 1 */
+  var nextPosition = (position - 1 + n) % numSlides + 1;
+
+  /* Normalize nextPosition in-case of a negative modulo result */
+  nextPosition = (nextPosition - 1 + numSlides) % numSlides + 1;
+
+  document.getElementById('slide-' + position).classList.add('hidden');
+  document.getElementById('slide-' + nextPosition).classList.remove('hidden');
+
+  updateProgress();
+  updateURL();
+  updateTabIndex();
+}
+
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  try {
+    window.history.replaceState({} , null, '#' + currentPosition());
+  } catch (e) {
+    window.location.hash = currentPosition();
+  }
+}
+
+
+/**
+ * Sets the progress indicator.
+ */
+function updateProgress() {
+  var progressBar = document.querySelector('.progress-bar');
+
+  if (progressBar !== null) {
+    var numSlides = document.getElementsByClassName('slide').length;
+    var position = currentPosition() - 1;
+    var percent = (numSlides === 1) ? 100 : 100 * position / (numSlides - 1);
+    progressBar.style.width = percent.toString() + '%';
+  }
+}
+
+
+/**
+ * Removes tabindex property from all links on the current slide, sets
+ * tabindex = -1 for all links on other slides. Prevents slides from appearing
+ * out of control.
+ */
+function updateTabIndex() {
+  var allLinks = document.querySelectorAll('.slide a');
+  var position = currentPosition();
+  var currentPageLinks = document.getElementById('slide-' + position).querySelectorAll('a');
+  var i;
+
+  for (i = 0; i < allLinks.length; i++) {
+    allLinks[i].setAttribute('tabindex', -1);
+  }
+
+  for (i = 0; i < currentPageLinks.length; i++) {
+    currentPageLinks[i].removeAttribute('tabindex');
+  }
+}
+
+/**
+ * Determines whether or not we are currently in full screen mode
+ */
+function isFullScreen() {
+  return document.fullscreenElement ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement ||
+         document.msFullscreenElement;
+}
+
+/**
+ * Toggle fullScreen mode on document element.
+ * Works on chrome (>= 15), firefox (>= 9), ie (>= 11), opera(>= 12.1), safari (>= 5).
+ */
+function toggleFullScreen() {
+  /* Convenient renames */
+  var docElem = document.documentElement;
+  var doc = document;
+
+  docElem.requestFullscreen =
+      docElem.requestFullscreen ||
+      docElem.msRequestFullscreen ||
+      docElem.mozRequestFullScreen ||
+      docElem.webkitRequestFullscreen.bind(docElem, Element.ALLOW_KEYBOARD_INPUT);
+
+  doc.exitFullscreen =
+      doc.exitFullscreen ||
+      doc.msExitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen;
+
+  isFullScreen() ? doc.exitFullscreen() : docElem.requestFullscreen();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Update the tabindex to prevent weird slide transitioning
+  updateTabIndex();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) {
+    navigate(parseInt(page) - 1);
+  }
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - FULLSCREEN
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+      navigate(-1);
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+      navigate(1);
+    } else if (kc === 13) {
+      toggleFullScreen();
+    }
+  };
+
+  if (document.querySelector('.next') && document.querySelector('.prev')) {
+    document.querySelector('.next').onclick = function (e) {
+      e.preventDefault();
+      navigate(1);
+    };
+
+    document.querySelector('.prev').onclick = function (e) {
+      e.preventDefault();
+      navigate(-1);
+    };
+  }
+});
+
+
+  </script>
+</body>
+</html>

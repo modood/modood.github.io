@@ -232,6 +232,64 @@ $ git flow release finish release-1.2
 
 --
 
+### Commit Message 提交描述信息
+
+**NOT GOOD**
+
+```
+init
+
+fix
+
+update
+```
+
+**BETTER**
+
+[AngularJS Git Commit Message Conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit)
+
+```
+feat: support pipe compilation from local metadata
+
+fix: correct position for re-projected containers
+
+refactor: avoid unnecessary operations and remove unused code
+```
+
+--
+
+### Commit Message 提交描述信息
+
+**使用 [commitizen](https://github.com/commitizen/cz-cli) 工具**
+
+![cz](images/cz.png)
+
+--
+
+### Commit Message 提交描述信息
+
+**使用 [commitizen](https://github.com/commitizen/cz-cli) 工具**
+
+![cz-cli](images/cz-cli.png)
+
+--
+
+### Commit Message 提交描述信息
+
+**使用 [commitizen](https://github.com/commitizen/cz-cli) 工具**
+
+![cz-log](images/cz-log.png)
+
+--
+
+### Commit Message 提交描述信息
+
+**使用 [cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog) 工具**
+
+![cz-change-log](images/cz-change-log.png)
+
+--
+
 ### 参考资料
 
 *   [Using pull requests in Bitbucket Server](https://confluence.atlassian.com/bitbucketserver/using-pull-requests-in-bitbucket-server-776639997.html)

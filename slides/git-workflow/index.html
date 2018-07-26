@@ -398,14 +398,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 hint: Updates were rejected because the tip of your current branch is behind
 hint: its remote counterpart. Merge the remote changes (e.g. &#39;git pull&#39;)
 hint: before pushing again.
-hint: See the &#39;Note about fast-forwards&#39; in &#39;git push --help&#39; for details.</code></pre>
-<p><strong>自动合并</strong></p>
+hint: See the &#39;Note about fast-forwards&#39; in &#39;git push --help&#39; for details.
+</code></pre><p><strong>自动合并</strong></p>
 <pre><code>$ git pull origin master
 
 产生大量的合并记录：
 
-Merge branch &#39;master&#39; of /path/to/repo.git</code></pre>
-</section>
+Merge branch &#39;master&#39; of /path/to/repo.git
+</code></pre></section>
   </div>
   <div class="slide hidden" id="slide-5">
     <section class="slide-content"><h3 id="-">集中式工作流</h3>
@@ -415,8 +415,8 @@ Merge branch &#39;master&#39; of /path/to/repo.git</code></pre>
 1.  避免了菱形的产生，保持提交曲线为线性，提交记录更整洁直观。
 2.  操作过程是把本地提交一次一个地迁移到更新了的中央仓库 master 分支之上。
     这意味着可能要解决在迁移某个提交时出现的合并冲突，而不是解决包含了所有提交的
-    大型合并时所出现的冲突。这样的方式让你尽可能保持每个提交的聚焦。</code></pre>
-<p><img src="images/rebase.png" alt="rebase"></p>
+    大型合并时所出现的冲突。这样的方式让你尽可能保持每个提交的聚焦。
+</code></pre><p><img src="images/rebase.png" alt="rebase"></p>
 </section>
   </div>
   <div class="slide hidden" id="slide-6">
@@ -428,15 +428,15 @@ Unmerged paths:
 (use &quot;git reset HEAD &lt;some-file&gt;...&quot; to unstage)
 (use &quot;git add/rm &lt;some-file&gt;...&quot; as appropriate to mark resolution)
 
-both modified: &lt;some-file&gt;</code></pre>
-<p><strong>手动解决</strong></p>
+both modified: &lt;some-file&gt;
+</code></pre><p><strong>手动解决</strong></p>
 <pre><code>$ git add
 $ git rebase --continue
 
-继续一个一个地合并后面的提交，如其它的提交有冲突就重复这个过程。</code></pre>
-<p><strong>终止合并</strong></p>
-<pre><code>$ git rebase --abort</code></pre>
-</section>
+继续一个一个地合并后面的提交，如其它的提交有冲突就重复这个过程。
+</code></pre><p><strong>终止合并</strong></p>
+<pre><code>$ git rebase --abort
+</code></pre></section>
   </div>
   <div class="slide hidden" id="slide-7">
     <section class="slide-content"><h3 id="-">功能分支工作流</h3>
@@ -452,15 +452,15 @@ $ git rebase --continue
   <div class="slide hidden" id="slide-8">
     <section class="slide-content"><h3 id="-">功能分支工作流</h3>
 <p><strong>新建分支</strong></p>
-<pre><code>$ git checkout -b marys-feature master</code></pre>
-<p><strong>提交到远程</strong></p>
-<pre><code>$ git push -u origin marys-feature</code></pre>
-<p><strong>合并到主干分支</strong></p>
+<pre><code>$ git checkout -b marys-feature master
+</code></pre><p><strong>提交到远程</strong></p>
+<pre><code>$ git push -u origin marys-feature
+</code></pre><p><strong>合并到主干分支</strong></p>
 <pre><code>$ git checkout master
 $ git pull origin marys-feature
 
-提示：功能分支合并到 master 分支后会自动关闭 Pull Request。</code></pre>
-</section>
+提示：功能分支合并到 master 分支后会自动关闭 Pull Request。
+</code></pre></section>
   </div>
   <div class="slide hidden" id="slide-9">
     <section class="slide-content"><h3 id="gitflow-">Gitflow 工作流</h3>
@@ -497,8 +497,8 @@ $ git merge --no-ff release-1.2
 $ git tag -a 1.2
 $ git checkout develop
 $ git merge --no-ff release-1.2
-$ git branch -d release-1.2</code></pre>
-<p><a href="https://docs.gitlab.com/ee/workflow/gitlab_flow.html#git-flow-and-its-problems">存在的问题</a></p>
+$ git branch -d release-1.2
+</code></pre><p><a href="https://docs.gitlab.com/ee/workflow/gitlab_flow.html#git-flow-and-its-problems">存在的问题</a></p>
 </section>
   </div>
   <div class="slide hidden" id="slide-12">
@@ -513,8 +513,8 @@ $ git flow hotfix start hotfix-1.2.1
 $ git flow hotfix finish hotfix-1.2.1
 
 $ git flow release start release-1.2
-$ git flow release finish release-1.2</code></pre>
-</section>
+$ git flow release finish release-1.2
+</code></pre></section>
   </div>
   <div class="slide hidden" id="slide-13">
     <section class="slide-content"><h3 id="gitflow-">Gitflow 工作流</h3>
@@ -539,6 +539,47 @@ $ git flow release finish release-1.2</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-16">
+    <section class="slide-content"><h3 id="commit-message-">Commit Message 提交描述信息</h3>
+<p><strong>NOT GOOD</strong></p>
+<pre><code>init
+
+fix
+
+update
+</code></pre><p><strong>BETTER</strong></p>
+<p><a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit">AngularJS Git Commit Message Conventions</a></p>
+<pre><code>feat: support pipe compilation from local metadata
+
+fix: correct position for re-projected containers
+
+refactor: avoid unnecessary operations and remove unused code
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-17">
+    <section class="slide-content"><h3 id="commit-message-">Commit Message 提交描述信息</h3>
+<p><strong>使用 <a href="https://github.com/commitizen/cz-cli">commitizen</a> 工具</strong></p>
+<p><img src="images/cz.png" alt="cz"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-18">
+    <section class="slide-content"><h3 id="commit-message-">Commit Message 提交描述信息</h3>
+<p><strong>使用 <a href="https://github.com/commitizen/cz-cli">commitizen</a> 工具</strong></p>
+<p><img src="images/cz-cli.png" alt="cz-cli"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-19">
+    <section class="slide-content"><h3 id="commit-message-">Commit Message 提交描述信息</h3>
+<p><strong>使用 <a href="https://github.com/commitizen/cz-cli">commitizen</a> 工具</strong></p>
+<p><img src="images/cz-log.png" alt="cz-log"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-20">
+    <section class="slide-content"><h3 id="commit-message-">Commit Message 提交描述信息</h3>
+<p><strong>使用 <a href="https://github.com/commitizen/cz-conventional-changelog">cz-conventional-changelog</a> 工具</strong></p>
+<p><img src="images/cz-change-log.png" alt="cz-change-log"></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-21">
     <section class="slide-content"><h3 id="-">参考资料</h3>
 <ul>
 <li><a href="https://confluence.atlassian.com/bitbucketserver/using-pull-requests-in-bitbucket-server-776639997.html">Using pull requests in Bitbucket Server</a></li>
@@ -549,11 +590,11 @@ $ git flow release finish release-1.2</code></pre>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-17">
+  <div class="slide hidden" id="slide-22">
     <section class="slide-content"><h1 id="-">谢谢</h1>
 </section>
   </div>
-  <div class="slide hidden author-slide" id="slide-18">
+  <div class="slide hidden author-slide" id="slide-23">
     <section class="slide-content"><div class="author">
   <h1 class="name">modood</h1>
     <h3 class="url">

@@ -8,6 +8,7 @@
 
 *   [Vim 模式](https://modood.github.io/slides/vim-mode/index.html)
 *   [Git 工作流](https://modood.github.io/slides/git-workflow/index.html)
+*   [Tendermint](https://modood.github.io/slides/tendermint/index.html)
 
 『Vim 编辑器』系列文章
 ----------------------

@@ -381,14 +381,14 @@ replicating an application on many machines.</p>
   </div>
   <div class="slide hidden" id="slide-3">
     <section class="slide-content"><h3 id="tendermint-vs-zk-etcd-consul">Tendermint vs ZK, etcd, consul</h3>
-<p><strong>Zookeeper, etcd, Consul</strong></p>
+<p><strong>zookeeper, etcd, consul</strong></p>
 <pre><code>1.  non-BFT: Zookeeper Atomic Broadcast(Paxos), Raft
     can tolerate crash failures in up to 1/2 of the machines,
     but even a single Byzantine fault can destroy the system
 2.  focused around providing basic services to distributed systems:
     kv store, dynamic configuration, service discovery,
     locking, leader-election, and so on.
-</code></pre><p><strong>Tendermint</strong></p>
+</code></pre><p><strong>tendermint</strong></p>
 <pre><code>1.  BFT: Byzantine Fault Tolerant
     can only tolerate up to a 1/3 of failures,
     but those failures can include arbitrary behaviour
@@ -400,10 +400,10 @@ replicating an application on many machines.</p>
   </div>
   <div class="slide hidden" id="slide-4">
     <section class="slide-content"><h3 id="tendermint-vs-bitcoin-ethereum">Tendermint vs Bitcoin, Ethereum</h3>
-<p><strong>Bitcoin, Ethereum</strong></p>
+<p><strong>bitcoin, ethereum</strong></p>
 <pre><code>1.  cryptocurrencies
 2.  Proof of Work
-</code></pre><p><strong>Tendermint</strong></p>
+</code></pre><p><strong>tendermint</strong></p>
 <pre><code>A general purpose blockchain consensus engine.
 
 It can be used as a plug-and-play replacement for the consensus engines
@@ -437,7 +437,7 @@ Message Types: DeliverTx, CheckTx, Commit
   </div>
   <div class="slide hidden" id="slide-7">
     <section class="slide-content"><h3 id="abci">ABCI</h3>
-<p><strong>Communicate with the application</strong></p>
+<p><strong>communicate with the application</strong></p>
 <pre><code>Tendermint Core (the &quot;consensus engine&quot;) communicates with the application
 via a socket protocol that satisfies the ABCI.
 
@@ -447,6 +447,9 @@ maintains 3 connections: mempool, consensus and query.
 *   one for the validation of transactions when broadcasting in the mempool
 *   one for the consensus engine to run block proposals
 *   one for querying the application state
+
+application: application process
+tendermint core: consensus process
 </code></pre></section>
   </div>
   <div class="slide hidden" id="slide-8">
@@ -454,7 +457,210 @@ maintains 3 connections: mempool, consensus and query.
 <p><img src="images/abci.png" style="width: 80%; height: auto; max-width: 100%; display: block; margin: 0 auto;"/></p>
 </section>
   </div>
-  <div class="slide hidden author-slide" id="slide-9">
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><h3 id="listening">Listening</h3>
+<p><strong>default</strong></p>
+<pre><code>26656     the listening address of the tendermint peer
+26657     the listening address of the RPC server
+26658     the socket address of the abci application
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h3 id="peers">Peers</h3>
+<p><strong>about</strong></p>
+<pre><code>p2p Provides an abstraction around peer-to-peer communication.
+
+peer exchange protocol (PeX)
+
+*  Seed
+*  Persistent Peer
+
+*  Validator
+*  Non-Validator
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h3 id="rpc-server">RPC server</h3>
+<p><strong>about</strong></p>
+<pre><code>Tendermint supports the following RPC protocols:
+
+*   URI over HTTP
+*   JSONRPC over HTTP
+*   JSONRPC over websockets
+
+Broadcast API:
+
+/broadcast_tx_async     will return right away
+                        without waiting to hear if the transaction is even valid
+/broadcast_tx_sync      will return with the result
+                        of running the transaction through `CheckTx`
+/broadcast_tx_commit    will wait until the transaction is committed in a block
+                        or until some timeout is reached
+
+Documentation: https://tendermint.com/rpc/
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h3 id="rpc-server">RPC server</h3>
+<p><strong>subscribing to events via websocket</strong></p>
+<pre><code>const (
+    EventCompleteProposal    = &quot;CompleteProposal&quot;
+    EventLock                = &quot;Lock&quot;
+    EventNewBlock            = &quot;NewBlock&quot;
+    EventNewBlockHeader      = &quot;NewBlockHeader&quot;
+    EventNewRound            = &quot;NewRound&quot;
+    EventNewRoundStep        = &quot;NewRoundStep&quot;
+    EventPolka               = &quot;Polka&quot;
+    EventProposalHeartbeat   = &quot;ProposalHeartbeat&quot;
+    EventRelock              = &quot;Relock&quot;
+    EventTimeoutPropose      = &quot;TimeoutPropose&quot;
+    EventTimeoutWait         = &quot;TimeoutWait&quot;
+    EventTx                  = &quot;Tx&quot;
+    EventUnlock              = &quot;Unlock&quot;
+    EventValidatorSetUpdates = &quot;ValidatorSetUpdates&quot;
+    EventVote                = &quot;Vote&quot;
+)
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h3 id="mempool">Mempool</h3>
+<p><strong>about</strong></p>
+<pre><code>mempool module handles all incoming transactions,
+whenever they are coming from peers or the application.
+
+A tx passed `CheckTx` (ie. was accepted into the mempool),
+
+
+option: mempool.recheck = true
+
+After every block, Tendermint rechecks every transaction left in the mempool
+to see if transactions committed in that block affected the application state,
+so some of the transactions left may become invalid.
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h3 id="consensus">Consensus</h3>
+<p><strong>standard block creation cycle</strong></p>
+<pre><code>1.  enter new round
+2.  enter `propose`
+    signed proposal
+    received complete proposal block
+3.  enter `prevote`
+    signed and pushed vote
+    added to prevote
+4.  enter `precommit`
+    signed and pushed vote
+    added to precommit
+5.  enter `commit`
+    executed block
+    committed state
+    recheck txs
+
+blocks are produced regularly, even if there are no transactions.
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-15">
+    <section class="slide-content"><h3 id="consensus">Consensus</h3>
+<p><img src="images/consensus.png" style="width: 100%; height: auto; max-width: 100%; display: block; margin: 0 auto;"/></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-16">
+    <section class="slide-content"><h3 id="wal">WAL</h3>
+<p><strong>WAL: Write Ahead Logs</strong></p>
+<pre><code>wal: for ensuring data integrity
+replay: to replay blocks and messages on recovery from a crash
+
+tendermint uses write ahead logs for:
+
+*   the mempool (mempool.wal): writes all incoming txs before running `CheckTx`
+*   the consensus (cs.wal): writes all consensus messages
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-17">
+    <section class="slide-content"><h3 id="fast-sync">Fast Sync</h3>
+<p><del>run the real-time consensus gossip protocol</del></p>
+<pre><code>option: fast_sync = true
+
+`fast-sync` mode is enabled by default
+
+1.  just download blocks
+2.  check the merkle tree of validators
+3.  the node is considered `caught up` if it has at least one peer and
+    it&#39;s height is at least as high as the max reported peer height
+4.  once `caught up`, the daemon will switch out of fast sync and
+    into the normal consensus mode
+5.  if we&#39;re lagging sufficiently, we should go back to fast syncing
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-18">
+    <section class="slide-content"><h3 id="configuration">Configuration</h3>
+<p><strong><a href="https://tendermint.com/docs/tendermint-core/running-in-production.html#configuration-parameters">config.toml</a></strong></p>
+<pre><code>▾ config/                       +---------------------+
+    config.toml --------------&gt; |   base              |
+    genesis.json                |   rpc               |
+    node_key.json               |   p2p               |
+    priv_validator.json         |   mempool           |
+                                |   consensus         |
+▾ data/                         |   tx_index          |
+    blockstore.db               |   instrumentation   |
+    evidence.db                 +---------------------+
+    state.db
+    tx_index.db
+    cs.wal
+    mempool.wal
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-19">
+    <section class="slide-content"><h3 id="tools">Tools</h3>
+<p><strong>tools for working with tendermint</strong></p>
+<pre><code>*   tools/tm-bench
+*   tools/tm-monitor
+*   scripts/wal2json
+*   scripts/json2wal
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-20">
+    <section class="slide-content"><h3 id="miscellaneous">Miscellaneous</h3>
+<p><strong>non-determinism</strong></p>
+<pre><code>*   random number generators (without deterministic seeding)
+*   race conditions on threads (or avoiding threads altogether)
+*   the system clock
+*   uninitialized memory (in unsafe programming languages like C or C++)
+*   floating point arithmetic
+*   language features that are random (e.g. map iteration in Go)
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-21">
+    <section class="slide-content"><h3 id="workflow">Workflow</h3>
+<pre><code>
+1.  create three connections (mempool, consensus and query) to the application
+2.  tendermint core and the application perform a handshake
+3.  start a few more things like the event switch, reactors,
+    and perform UPNP discover in order to detect the IP address
+4.  replay all the messages from the wal
+5.  &quot;started node&quot; message signals that everything is ready for work
+6.  next follows a standard block creation cycle, where we enter a new round,
+    1) propose a block,
+    2) receive more than 2/3 of prevotes,
+    3) then precommits
+    4) finally have a chance to commit a block
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-22">
+    <section class="slide-content"><h3 id="references">References</h3>
+<ul>
+<li><a href="https://github.com/tendermint/tendermint">github - tendermint</a></li>
+<li><a href="https://tendermint.com/docs/">tendermint core docs</a></li>
+<li><a href="https://tendermint.com/rpc/">tendermint rpc reference</a></li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-23">
+    <section class="slide-content"><h1 id="thanks">Thanks</h1>
+<p><br/><center>2018.09.26</center></p>
+</section>
+  </div>
+  <div class="slide hidden author-slide" id="slide-24">
     <section class="slide-content"><div class="author">
   <h1 class="name">modood</h1>
     <h3 class="url">

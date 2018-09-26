@@ -6,17 +6,17 @@
 『技术分享』slide 列表
 -----------------------------------
 
-*   [Vim 模式](https://modood.github.io/slides/vim-mode/index.html)
-*   [Git 工作流](https://modood.github.io/slides/git-workflow/index.html)
-*   [Tendermint](https://modood.github.io/slides/tendermint/index.html)
+*   [2017.04.16 - Vim 模式](https://modood.github.io/slides/vim-mode/index.html)
+*   [2017.06.20 - Git 工作流](https://modood.github.io/slides/git-workflow/index.html)
+*   [2018.09.26 - Tendermint](https://modood.github.io/slides/tendermint/index.html)
 
 『Vim 编辑器』系列文章
 ----------------------
 
 *   [『Vim 编辑器』之快捷键映射](https://github.com/modood/modood.github.io/blob/master/articles/vim-editor/01-map.md)
 
-『JavaScript 化整为零』系列文章
--------------------------------
+『JavaScript 化整为零』系列文章（2015年）
+----------------------------------------
 
 *   [『JavaScript 化整为零』之引用](https://github.com/modood/modood.github.io/blob/master/articles/js-piece/01-reference-type.md)
 *   [『JavaScript 化整为零』之原型链](https://github.com/modood/modood.github.io/blob/master/articles/js-piece/02-prototype-chain.md)
@@ -29,8 +29,8 @@
 *   『JavaScript 化整为零』之流程控制
 *   『JavaScript 化整为零』之函数式编程
 
-『Go 语法基础』系列文章
------------------------
+『Go 语法基础』系列文章（2016年）
+--------------------------------
 
 *   [『Go 语法基础』之声明](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/01-declaration.md)
 *   [『Go 语法基础』之语句](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/02-statement.md)
@@ -41,8 +41,8 @@
 *   [『Go 语法基础』之类型](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/07-type.md)
 *   [『Go 语法基础』之并发](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/08-concurrency.md)
 
-『Go 化整为零』系列文章
------------------------
+『Go 化整为零』系列文章（2016年）
+--------------------------------
 
 *   [『Go 化整为零』之文档](https://github.com/modood/modood.github.io/blob/master/articles/go-piece/01-doc.md)
 *   [『Go 化整为零』之字符和字节](https://github.com/modood/modood.github.io/blob/master/articles/go-piece/02-byte-rune.md)

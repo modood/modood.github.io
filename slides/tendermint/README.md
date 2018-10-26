@@ -4,13 +4,13 @@ author:
   url: https://github.com/modood
 output: index.html
 
---
+----
 
 # Tendermint
 
 <br/><center>Warner Ma</center>
 
---
+----
 
 ### What is Tendermint?
 
@@ -29,7 +29,7 @@ works even if up to 1/3 of machines fail in arbitrary ways
 every non-faulty machine sees the same transaction log and computes the same state
 ```
 
---
+----
 
 ### Tendermint vs ZK, etcd, consul
 
@@ -56,7 +56,7 @@ every non-faulty machine sees the same transaction log and computes the same sta
     from key-value store to cryptocurrency to e-voting platform and beyond.
 ```
 
---
+----
 
 ### Tendermint vs Bitcoin, Ethereum
 
@@ -76,7 +76,7 @@ It can be used as a plug-and-play replacement for the consensus engines
 of other blockchain software
 ```
 
---
+----
 
 ### Tendermint vs Bitcoin, Ethereum
 
@@ -96,7 +96,7 @@ and an alternative blockchain API.
 It uses Tendermint as its consensus engine, and provides a particular application state.
 ```
 
---
+----
 
 ### ABCI
 
@@ -113,7 +113,7 @@ and its primary implementation, the Tendermint Socket Protocol (TSP, or Teaspoon
 Message Types: DeliverTx, CheckTx, Commit
 ```
 
---
+----
 
 ### ABCI
 
@@ -134,13 +134,13 @@ application: application process
 tendermint core: consensus process
 ```
 
---
+----
 
 ### ABCI
 
 <img src="images/abci.png" style="width: 80%; height: auto; max-width: 100%; display: block; margin: 0 auto;"/>
 
---
+----
 
 ### Listening
 
@@ -152,7 +152,7 @@ tendermint core: consensus process
 26658     the socket address of the abci application
 ```
 
---
+----
 
 ### Peers
 
@@ -170,7 +170,7 @@ peer exchange protocol (PeX)
 *  Non-Validator
 ```
 
---
+----
 
 ### RPC server
 
@@ -195,7 +195,7 @@ Broadcast API:
 Documentation: https://tendermint.com/rpc/
 ```
 
---
+----
 
 ### RPC server
 
@@ -221,7 +221,7 @@ const (
 )
 ```
 
---
+----
 
 ### Mempool
 
@@ -241,7 +241,7 @@ to see if transactions committed in that block affected the application state,
 so some of the transactions left may become invalid.
 ```
 
---
+----
 
 ### Consensus
 
@@ -266,13 +266,13 @@ so some of the transactions left may become invalid.
 blocks are produced regularly, even if there are no transactions.
 ```
 
---
+----
 
 ### Consensus
 
 <img src="images/consensus.png" style="width: 100%; height: auto; max-width: 100%; display: block; margin: 0 auto;"/>
 
---
+----
 
 ### WAL
 
@@ -288,7 +288,7 @@ tendermint uses write ahead logs for:
 *   the consensus (cs.wal): writes all consensus messages
 ```
 
---
+----
 
 ### Fast Sync
 
@@ -308,7 +308,7 @@ option: fast_sync = true
 5.  if we're lagging sufficiently, we should go back to fast syncing
 ```
 
---
+----
 
 ### Configuration
 
@@ -330,7 +330,7 @@ option: fast_sync = true
     mempool.wal
 ```
 
---
+----
 
 ### Tools
 
@@ -343,7 +343,7 @@ option: fast_sync = true
 *   scripts/json2wal
 ```
 
---
+----
 
 ### Miscellaneous
 
@@ -358,7 +358,7 @@ option: fast_sync = true
 *   language features that are random (e.g. map iteration in Go)
 ```
 
---
+----
 
 ### Workflow
 
@@ -377,7 +377,7 @@ option: fast_sync = true
     4) finally have a chance to commit a block
 ```
 
---
+----
 
 ### References
 
@@ -385,7 +385,7 @@ option: fast_sync = true
 *   [tendermint core docs](https://tendermint.com/docs/)
 *   [tendermint rpc reference](https://tendermint.com/rpc/)
 
---
+----
 
 # Thanks
 

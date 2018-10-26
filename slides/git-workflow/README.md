@@ -4,11 +4,11 @@ author:
   url: https://github.com/modood
 output: index.html
 
---
+----
 
 # Git 工作流
 
---
+----
 
 ### 分类
 
@@ -17,7 +17,7 @@ output: index.html
 *   Gitflow 工作流
 *   Forking 工作流
 
---
+----
 
 ### 集中式工作流
 
@@ -30,7 +30,7 @@ output: index.html
 
 *   `git push origin master`
 
---
+----
 
 ### 集中式工作流
 
@@ -54,7 +54,7 @@ $ git pull origin master
 Merge branch 'master' of /path/to/repo.git
 ```
 
---
+----
 
 ### 集中式工作流
 
@@ -71,7 +71,7 @@ $ git pull --rebase origin master
 
 ![rebase](images/rebase.png)
 
---
+----
 
 ### 集中式工作流
 
@@ -102,7 +102,7 @@ $ git rebase --continue
 $ git rebase --abort
 ```
 
---
+----
 
 ### 功能分支工作流
 
@@ -114,7 +114,7 @@ $ git rebase --abort
 
 ![merge-branch](images/merge-branch.gif)
 
---
+----
 
 ### 功能分支工作流
 
@@ -139,7 +139,7 @@ $ git pull origin marys-feature
 提示：功能分支合并到 master 分支后会自动关闭 Pull Request。
 ```
 
---
+----
 
 ### Gitflow 工作流
 
@@ -156,7 +156,7 @@ $ git pull origin marys-feature
 *   release-* 分支用于预发布。
 *   hotfix-* 分支用于给生产环境打补丁。
 
---
+----
 
 ### Gitflow 工作流
 
@@ -164,7 +164,7 @@ $ git pull origin marys-feature
 
 ![gitflow](images/gitflow.png)
 
---
+----
 
 ### Gitflow 工作流
 
@@ -185,7 +185,7 @@ $ git branch -d release-1.2
 
 [存在的问题](https://docs.gitlab.com/ee/workflow/gitlab_flow.html#git-flow-and-its-problems)
 
---
+----
 
 ### Gitflow 工作流
 
@@ -204,7 +204,7 @@ $ git flow release start release-1.2
 $ git flow release finish release-1.2
 ```
 
---
+----
 
 ### Gitflow 工作流
 
@@ -212,7 +212,7 @@ $ git flow release finish release-1.2
 
 ![gitflow-commands](images/gitflow-cmd.png)
 
---
+----
 
 ### Forking 工作流
 
@@ -222,7 +222,7 @@ $ git flow release finish release-1.2
 *   各个开发者都有一个服务端仓库。
 *   项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。
 
---
+----
 
 ### Forking 工作流
 
@@ -230,7 +230,7 @@ $ git flow release finish release-1.2
 
 ![forking-workflow](images/forking-workflow.png)
 
---
+----
 
 ### Commit Message 提交描述信息
 
@@ -256,7 +256,7 @@ fix: correct position for re-projected containers
 refactor: avoid unnecessary operations and remove unused code
 ```
 
---
+----
 
 ### Commit Message 提交描述信息
 
@@ -264,7 +264,7 @@ refactor: avoid unnecessary operations and remove unused code
 
 ![cz](images/cz.png)
 
---
+----
 
 ### Commit Message 提交描述信息
 
@@ -272,7 +272,7 @@ refactor: avoid unnecessary operations and remove unused code
 
 ![cz-cli](images/cz-cli.png)
 
---
+----
 
 ### Commit Message 提交描述信息
 
@@ -280,7 +280,7 @@ refactor: avoid unnecessary operations and remove unused code
 
 ![cz-log](images/cz-log.png)
 
---
+----
 
 ### Commit Message 提交描述信息
 
@@ -288,7 +288,7 @@ refactor: avoid unnecessary operations and remove unused code
 
 ![cz-change-log](images/cz-change-log.png)
 
---
+----
 
 ### 参考资料
 
@@ -298,6 +298,6 @@ refactor: avoid unnecessary operations and remove unused code
 *   [Comparing Workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) 【[翻译](http://blog.jobbole.com/76843/)】
 *   [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/) 【[翻译](http://www.oschina.net/translate/a-successful-git-branching-model)】
 
---
+----
 
 # 谢谢

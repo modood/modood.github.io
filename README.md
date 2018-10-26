@@ -6,8 +6,13 @@
 『技术分享』slide 列表
 -----------------------------------
 
-*   [2017.04.16 - Vim 模式](https://modood.github.io/slides/vim-mode/index.html)
 *   [2017.06.20 - Git 工作流](https://modood.github.io/slides/git-workflow/index.html)
+*   [2017.04.16 - Vim 模式](https://modood.github.io/slides/vim-mode/index.html)
+
+『区块链生态系统』系列 slide 列表
+---------------------------------
+
+*   [2018.10.25 - Cello](https://modood.github.io/slides/cello/index.html)
 *   [2018.09.26 - Tendermint](https://modood.github.io/slides/tendermint/index.html)
 
 『Vim 编辑器』系列文章

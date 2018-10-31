@@ -1,0 +1,723 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Intel® SGX</title>
+  <style type="text/css">
+    body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
+  font-size: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: #f7f7f7;
+}
+
+.slide-content {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  margin: 80px auto 0 auto;
+  padding: 30px;
+
+  font-weight: 200;
+  font-size: 200%;
+  line-height: 1.375;
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0; height: 0;
+  border: 30px solid #333;
+  float: left;
+  margin-right: 30px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+
+  border-left-width: 50px;
+  border-right-width: 0;
+}
+
+.prev:hover {
+  border-right-color: #888;
+  cursor: pointer;
+}
+
+.next:hover {
+  border-left-color: #888;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 300%;
+  line-height: 1.2;
+  text-align: center;
+  margin: 170px 0 0;
+}
+
+h2 {
+  font-size: 100%;
+  line-height: 1.2;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 140%;
+  line-height: 1.2;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  line-height: 1.375;
+}
+
+.author h1 {
+  font-size: 170%;
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 95%;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: #44a4dd;
+}
+
+a:hover {
+  color: #66b5ff;
+}
+
+pre {
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 1;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background-color: #b4b4b4;
+
+  -webkit-transition: width 0.05s ease-out;
+  -moz-transition: width 0.05s ease-out;
+  -o-transition: width 0.05s ease-out;
+  transition: width 0.05s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+
+  body {
+    font-size: 70%;
+  }
+
+  .slide-content {
+    width: auto;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 120px;
+  }
+
+  .prev, .prev:hover {
+    border-right-color: rgba(135, 135, 135, 0.5);
+  }
+
+  .next, .next:hover {
+    border-left-color: rgba(135, 135, 135, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 50%;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    padding: 10px;
+    margin-top: 10px;
+    height: 340px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+
+  @page {
+    size: letter;
+  }
+
+  .hidden {
+    display: inline;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body {
+    margin: 0 auto !important;
+    border: 0;
+    padding: 0;
+    float: none !important;
+    overflow: visible;
+    background: none !important;
+    font-size: 52%;
+  }
+
+  .progress, .controls {
+    display: none;
+  }
+
+  .slide {
+    position: static;
+  }
+
+  .slide-content {
+    border: 1px solid #222;
+    margin-top: 0;
+    margin-bottom: 40px;
+    height: 3.5in;
+    overflow: visible;
+  }
+
+  .slide:nth-child(even) {
+    /* 2 slides per page */
+    page-break-before: always;
+  }
+}
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+
+  </style>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="slide --" id="slide-1">
+    <section class="slide-content"><h1 id="intel-sgx">Intel® SGX</h1>
+<p><br/><center>Warner Ma</center></p>
+</section>
+  </div>
+  <div class="slide hidden --" id="slide-2">
+    <section class="slide-content"><h3 id="intel-software-guard-extensions">Intel® Software Guard Extensions</h3>
+<p><strong>about</strong></p>
+<pre><code>A Trusted Execution Environment from Intel for applications.
+
+Delivers enhanced privacy and security that can help protect
+blockchain transactions, and help improve throughput and consensus efficiency.
+
+Isolates a portion of physical memory to protect select code and data from view or
+modification. In Intel SGX, these isolated portions of memory are called “enclaves”.
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-3">
+    <section class="slide-content"><h3 id="intel-software-guard-extensions">Intel® Software Guard Extensions</h3>
+<p><strong>features</strong></p>
+<pre><code>*   Confidentiality and integrity
+    Enforced at the operating system, BIOS, VMM, SMM, or TEE layers even in the
+    presence of privileged malware.
+
+*   Low learning curve
+    A familiar operating system programming model integrates with the parent
+    application and executes on the main processor.
+
+*   Remote attest and provision
+    A remote party can verify an application enclave identity and securely provision
+    keys, credentials, and other sensitive data to the enclave.
+
+*   Small attack surface
+    The processor boundary becomes the attack surface perimeter—all data, memory,
+    and I/O outside this perimeter is encrypted.
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-4">
+    <section class="slide-content"><h3 id="intel-software-guard-extensions">Intel® Software Guard Extensions</h3>
+<p><strong>faq</strong></p>
+<pre><code>How will it be possible to tell if a system is Intel SGX capable?
+
+Intel® vPro™ technology, Intel® Core™ processor, Intel® Pentium® processor and
+Intel® Celeron® processor branded systems with initial ship dates in Q3 2015 will
+have Intel SGX silicon capabilities.
+
+In order to use Intel SGX, BIOS support is required. OEMs can choose whether to
+provide BIOS support or not. If BIOS support is provided, it can be shipped
+turned on or turned off.
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-5">
+    <section class="slide-content"><h3 id="intel-software-guard-extensions">Intel® Software Guard Extensions</h3>
+<p><strong>faq</strong></p>
+<pre><code>What Do You Need to Develop and Run Enclaves?
+
+*   A platform with an Intel® SGX-enabled CPU and BIOS
+*   Intel SGX platform software (PSW)
+*   The Intel SGX software development kit (SDK)
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-6">
+    <section class="slide-content"><h3 id="trusted-and-untrusted-partitions">Trusted and Untrusted Partitions</h3>
+<p><strong>workflow</strong></p>
+<p><img src="images/workflow.png" style="width: 100%; height: auto; max-width: 100%;"/></p>
+</section>
+  </div>
+  <div class="slide hidden --" id="slide-7">
+    <section class="slide-content"><h3 id="intel-sgx-and-blockchain">Intel® SGX and Blockchain</h3>
+<p><strong>Hyperledger Sawtooth</strong></p>
+<pre><code>https://www.hyperledger.org/projects/sawtooth
+
+Hyperledger Sawtooth is an enterprise solution for building, deploying, and
+running distributed ledgers.
+</code></pre><p><strong>Proof of Elapsed Time (PoET)</strong></p>
+<pre><code>A Nakamoto-style consensus algorithm that is designed to be a production-grade
+protocol capable of supporting large network populations.
+
+PoET relies on secure instruction execution to achieve the scaling benefits of
+a Nakamoto-style consensus algorithm without the power consumption drawbacks of
+the Proof of Work algorithm.
+
+Uses Intel SGX for an economical leader election process.
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-8">
+    <section class="slide-content"><h3 id="intel-sgx-and-blockchain">Intel® SGX and Blockchain</h3>
+<p><strong>Microsoft Coco Framework</strong></p>
+<pre><code>https://github.com/Azure/coco-framework
+
+Microsoft uses Intel Software Guard Extensions (Intel SGX) to protect the Coco Framework.
+
+The trusted execution environment of Intel SGX enables Coco to deliver a novel consensus
+mechanism that can deliver up to 1600 transactions per second and also helps Coco
+transactions remain confidential among blockchain participants.
+
+Status:
+
+Microsoft plans to open source the Coco Blockchain Framework code in 2018
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-9">
+    <section class="slide-content"><h3 id="intel-sgx-and-blockchain">Intel® SGX and Blockchain</h3>
+<p><strong>Hyperledger Labs MinBFT</strong></p>
+<pre><code>https://github.com/hyperledger-labs/minbft
+
+MinBFT is a pluggable software component that allows to achieve Byzantine fault-tolerant
+consensus with fewer consenting nodes and less communication rounds comparing to the
+conventional BFT protocols.
+
+*   it requires only 2f+1 consenting nodes in order to tolerate f faulty nodes
+    (or tolerate up to half of faulty nodes);
+*   committing a message requires only 2 rounds of communication among the nodes
+    instead of 3 rounds as in PBFT
+
+Status:
+
+This project is in experimental development stage.
+It is not suitable for any kind of production use.
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-10">
+    <section class="slide-content"><h3 id="hardware-on-trend">Hardware on trend</h3>
+<p><strong>trends</strong></p>
+<pre><code>However, Intel is not the only player seeking to position its hardware as essential
+for blockchain development.
+
+Earlier this year (2017), tech consultancy Accenture integrated the Thale&#39;s
+hardware security module (HSM) in an effort to end the debate in enterprise circles
+over blockchain&#39;s security loopholes.
+And IBM offers users of its High Security Business Network access to its HSM too.
+
+The Initiative For CryptoCurrencies &amp; Contracts (IC3) proposed using SGX to
+help scale bitcoin, it sparked a heated debate.
+
+Not everyone agrees hardware solutions will solve blockchain&#39;s security problems,
+though. Microsoft itself touted its software-based trusted execution environments (TEEs)
+at the same launch where Echevarria was discussing Intel&#39;s hardware-based strategy.
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-11">
+    <section class="slide-content"><h3 id="hardware-on-trend">Hardware on trend</h3>
+<p><strong>disputes</strong></p>
+<pre><code>Silicon Blockchain: Intel&#39;s Distributed Ledger Strategy Is All About Hardware
+http://t.cn/EwLCOWB
+
+Hardware Over Hard Forks: How Accenture Plans to End Blockchain&#39;s Security Debate
+http://t.cn/EwLCHEp
+
+Blockchain hardware in your data center might not solve any problems
+http://t.cn/EwLC3fs
+
+Intel is Winning Over Blockchain Critics By Reimagining Bitcoin&#39;s DNA
+http://t.cn/EwLCknr
+
+Trusted Hardware Can Help Bitcoin Scale, But At What Cost?
+http://t.cn/EwLNZdn
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-12">
+    <section class="slide-content"><h3 id="references">References</h3>
+<p><strong>references</strong></p>
+<pre><code>Intel and Blockchain—Better Together：How Intel is Shaping Blockchain Technology
+http://t.cn/EwL1K3t
+
+Create a Silicon-based Trusted Infrastructure
+http://t.cn/EwL1lZM
+
+Hardware-Enabled Security Powered by Intel® Technology
+http://t.cn/EwL1n7o
+
+Intel SGX Homepage | Intel® Software
+http://t.cn/RCme793
+
+Silicon Blockchain: Intel&#39;s Distributed Ledger Strategy Is All About Hardware
+http://t.cn/EwLCOWB
+
+Blockchain Moves Beyond Bitcoin - iQ by Intel
+http://t.cn/EwLB4A0
+</code></pre></section>
+  </div>
+  <div class="slide hidden --" id="slide-13">
+    <section class="slide-content"><h1 id="thanks">Thanks</h1>
+<p><br/><center>2018.10.31</center></p>
+</section>
+  </div>
+  <div class="slide hidden author-slide" id="slide-14">
+    <section class="slide-content"><div class="author">
+  <h1 class="name">modood</h1>
+    <h3 class="url">
+      <a href="https://github.com/modood">https://github.com/modood</a>
+    </h3>
+</div>
+</section>
+  </div>
+
+  <div class="controls">
+    <div class="arrow prev"></div>
+    <div class="arrow next"></div>
+  </div>
+
+
+  <script type="text/javascript">
+    /**
+ * Returns the current page number of the presentation.
+ */
+function currentPosition() {
+  return parseInt(document.querySelector('.slide:not(.hidden)').id.slice(6));
+}
+
+
+/**
+ * Navigates forward n pages
+ * If n is negative, we will navigate in reverse
+ */
+function navigate(n) {
+  var position = currentPosition();
+  var numSlides = document.getElementsByClassName('slide').length;
+
+  /* Positions are 1-indexed, so we need to add and subtract 1 */
+  var nextPosition = (position - 1 + n) % numSlides + 1;
+
+  /* Normalize nextPosition in-case of a negative modulo result */
+  nextPosition = (nextPosition - 1 + numSlides) % numSlides + 1;
+
+  document.getElementById('slide-' + position).classList.add('hidden');
+  document.getElementById('slide-' + nextPosition).classList.remove('hidden');
+
+  updateProgress();
+  updateURL();
+  updateTabIndex();
+}
+
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  try {
+    window.history.replaceState({} , null, '#' + currentPosition());
+  } catch (e) {
+    window.location.hash = currentPosition();
+  }
+}
+
+
+/**
+ * Sets the progress indicator.
+ */
+function updateProgress() {
+  var progressBar = document.querySelector('.progress-bar');
+
+  if (progressBar !== null) {
+    var numSlides = document.getElementsByClassName('slide').length;
+    var position = currentPosition() - 1;
+    var percent = (numSlides === 1) ? 100 : 100 * position / (numSlides - 1);
+    progressBar.style.width = percent.toString() + '%';
+  }
+}
+
+
+/**
+ * Removes tabindex property from all links on the current slide, sets
+ * tabindex = -1 for all links on other slides. Prevents slides from appearing
+ * out of control.
+ */
+function updateTabIndex() {
+  var allLinks = document.querySelectorAll('.slide a');
+  var position = currentPosition();
+  var currentPageLinks = document.getElementById('slide-' + position).querySelectorAll('a');
+  var i;
+
+  for (i = 0; i < allLinks.length; i++) {
+    allLinks[i].setAttribute('tabindex', -1);
+  }
+
+  for (i = 0; i < currentPageLinks.length; i++) {
+    currentPageLinks[i].removeAttribute('tabindex');
+  }
+}
+
+/**
+ * Determines whether or not we are currently in full screen mode
+ */
+function isFullScreen() {
+  return document.fullscreenElement ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement ||
+         document.msFullscreenElement;
+}
+
+/**
+ * Toggle fullScreen mode on document element.
+ * Works on chrome (>= 15), firefox (>= 9), ie (>= 11), opera(>= 12.1), safari (>= 5).
+ */
+function toggleFullScreen() {
+  /* Convenient renames */
+  var docElem = document.documentElement;
+  var doc = document;
+
+  docElem.requestFullscreen =
+      docElem.requestFullscreen ||
+      docElem.msRequestFullscreen ||
+      docElem.mozRequestFullScreen ||
+      docElem.webkitRequestFullscreen.bind(docElem, Element.ALLOW_KEYBOARD_INPUT);
+
+  doc.exitFullscreen =
+      doc.exitFullscreen ||
+      doc.msExitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen;
+
+  isFullScreen() ? doc.exitFullscreen() : docElem.requestFullscreen();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Update the tabindex to prevent weird slide transitioning
+  updateTabIndex();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) {
+    navigate(parseInt(page) - 1);
+  }
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - FULLSCREEN
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+      navigate(-1);
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+      navigate(1);
+    } else if (kc === 13) {
+      toggleFullScreen();
+    }
+  };
+
+  if (document.querySelector('.next') && document.querySelector('.prev')) {
+    document.querySelector('.next').onclick = function (e) {
+      e.preventDefault();
+      navigate(1);
+    };
+
+    document.querySelector('.prev').onclick = function (e) {
+      e.preventDefault();
+      navigate(-1);
+    };
+  }
+});
+
+
+  </script>
+</body>
+</html>

@@ -12,6 +12,7 @@
 『区块链生态系统』系列 slide 列表
 ---------------------------------
 
+*   [2018.10.31 - Intel SGX](https://modood.github.io/slides/intel-sgx/index.html)
 *   [2018.10.25 - Cello](https://modood.github.io/slides/cello/index.html)
 *   [2018.09.26 - Tendermint](https://modood.github.io/slides/tendermint/index.html)
 

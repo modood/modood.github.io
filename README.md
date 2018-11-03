@@ -15,7 +15,7 @@
 |:-----------|:-----|
 | 2018.10.31 | [Intel SGX](https://modood.github.io/slides/intel-sgx/index.html)
 | 2018.00.00 | Hyperledger Fabric
-| 2018.10.25 | [Hyperledger Cello](https://modood.github.io/slides/cello/index.html)
+| 2018.10.25 | [Hyperledger Cello](https://modood.github.io/slides/hyperledger-cello/index.html)
 | 2018.00.00 | Hyperledger Caliper
 | 2018.00.00 | Hyperledger Labs MinBFT
 | 2018.09.26 | [Tendermint](https://modood.github.io/slides/tendermint/index.html)

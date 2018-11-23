@@ -236,7 +236,7 @@ Table of contents
 
 *   转数字
 
-    我在另外一篇文章里详细介绍了数字类型的转换：[『JavaScript 化整为零』之数值](https://github.com/modood/modood.github.io/blob/master/js-piece/05-number.md)
+    我在另外一篇文章里详细介绍了数字类型的转换：[『JavaScript 化整为零』之数值](https://github.com/modood/modood.github.io/blob/master/articles/js-piece/05-number.md)
 
 *   转布尔值
 

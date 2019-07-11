@@ -47,11 +47,7 @@
 *   [『Go 语法基础』之映射](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/06-map.md)
 *   [『Go 语法基础』之类型](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/07-type.md)
 *   [『Go 语法基础』之并发](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/08-concurrency.md)
-
-## 『Go 化整为零』系列文章（2016年）
-
-*   [『Go 化整为零』之文档](https://github.com/modood/modood.github.io/blob/master/articles/go-piece/01-doc.md)
-*   [『Go 化整为零』之字符和字节](https://github.com/modood/modood.github.io/blob/master/articles/go-piece/02-byte-rune.md)
+*   [『Go 化整为零』之文档](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/09-doc.md)
 
 ## 『Linux 常用守护进程』系列文章（2018年）
 

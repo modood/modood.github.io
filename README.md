@@ -24,6 +24,29 @@
 
 *   [『Vim 编辑器』之快捷键映射](https://github.com/modood/modood.github.io/blob/master/articles/vim-editor/01-map.md)
 
+## 『密码学应用』系列文章（2019年）
+
+*   [『密码学应用』之字符编码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/01-character-set.md)
+*   [『密码学应用』之二进制数据编码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/02-binary-encoding.md)
+*   『密码学应用』之对称加密
+*   『密码学应用』之非对称加密
+*   『密码学应用』之密钥交换
+*   『密码学应用』之消息摘要
+*   『密码学应用』之消息认证码
+*   『密码学应用』之数字签名
+*   『密码学应用』之公钥指纹
+*   『密码学应用』之基于口令加密
+*   『密码学应用』之数字证书
+*   『密码学应用』之数字证书认证机构
+*   『密码学应用』之根证书
+*   『密码学应用』之公开密钥基础设施
+*   『密码学应用』之同态加密
+*   『密码学应用』之区块链应用：助记词
+*   『密码学应用』之区块链应用：大零币-零知识证明
+*   『密码学应用』之区块链应用：门罗币-环签名
+*   『密码学应用』之区块链应用：达世币-混币技术
+*   『密码学应用』之区块链应用：微笑币-MimbleWimble 协议
+
 ## 『JavaScript 化整为零』系列文章（2015年）
 
 *   [『JavaScript 化整为零』之引用](https://github.com/modood/modood.github.io/blob/master/articles/js-piece/01-reference-type.md)

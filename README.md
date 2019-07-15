@@ -28,7 +28,7 @@
 
 *   [『密码学应用』之字符编码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/01-character-set.md)
 *   [『密码学应用』之二进制数据编码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/02-binary-encoding.md)
-*   『密码学应用』之对称加密
+*   [『密码学应用』之对称加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/03-symmetric-key-algorithm.md)
 *   『密码学应用』之非对称加密
 *   『密码学应用』之密钥交换
 *   『密码学应用』之消息摘要

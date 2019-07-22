@@ -29,11 +29,9 @@
 *   [『密码学应用』之字符编码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/01-character-set.md)
 *   [『密码学应用』之二进制数据编码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/02-binary-encoding.md)
 *   [『密码学应用』之对称加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/03-symmetric-key-algorithm.md)
-*   『密码学应用』之非对称加密
-*   『密码学应用』之密钥交换
-*   『密码学应用』之消息摘要
-*   『密码学应用』之消息认证码
-*   『密码学应用』之数字签名
+*   [『密码学应用』之非对称加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/04-asymmetric-key-algorithm.md)
+*   [『密码学应用』之密钥交换](https://github.com/modood/modood.github.io/blob/master/articles/crypto/05-key-exchange.md)
+*   [『密码学应用』之消息摘要、消息认证码和数字签名](https://github.com/modood/modood.github.io/blob/master/articles/crypto/06-hash-mac-sign.md)
 *   『密码学应用』之公钥指纹
 *   『密码学应用』之基于口令加密
 *   『密码学应用』之数字证书

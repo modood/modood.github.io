@@ -70,21 +70,6 @@
 *   [『Go 语法基础』之并发](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/08-concurrency.md)
 *   [『Go 化整为零』之文档](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/09-doc.md)
 
-## 『Linux 常用守护进程』系列文章（2018年）
-
-*   『Linux 常用守护进程』之 atd
-*   『Linux 常用守护进程』之 crond
-*   『Linux 常用守护进程』之 systemd
-*   『Linux 常用守护进程』之 firewalld
-*   『Linux 常用守护进程』之 pm2
-*   『Linux 常用守护进程』之 dockerd
-
-## 『Linux 运维脚本工具』系列文章（2018年）
-
-*   『Linux 运维脚本工具』之 bash
-*   『Linux 运维脚本工具』之 make
-*   『Linux 运维脚本工具』之 ansible
-
 ## 版权许可
 
 本项目所有内容采用“保持署名—非商用”创意共享4.0许可证。

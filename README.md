@@ -32,15 +32,15 @@
 *   [『密码学应用』之非对称加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/04-asymmetric-key-algorithm.md)
 *   [『密码学应用』之密钥交换](https://github.com/modood/modood.github.io/blob/master/articles/crypto/05-key-exchange.md)
 *   [『密码学应用』之消息摘要、消息认证码和数字签名](https://github.com/modood/modood.github.io/blob/master/articles/crypto/06-hash-mac-sign.md)
-*   『密码学应用』之公钥指纹
-*   『密码学应用』之基于口令加密
-*   『密码学应用』之数字证书
-*   『密码学应用』之数字证书认证机构
-*   『密码学应用』之根证书
-*   『密码学应用』之公开密钥基础设施
-*   『密码学应用』之同态加密
-*   『密码学应用』之区块链应用：助记词
-*   『密码学应用』之区块链应用：大零币-零知识证明
+*   [『密码学应用』之公钥指纹](https://github.com/modood/modood.github.io/blob/master/articles/crypto/07-public-key-fingerprint.md)
+*   [『密码学应用』之基于口令加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/08-password-based-encryption.md)
+*   [『密码学应用』之双重认证](https://github.com/modood/modood.github.io/blob/master/articles/crypto/09-two-factor-authentication.md)
+*   [『密码学应用』之二维码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/10-quick-response-code.md)
+*   [『密码学应用』之数字证书](https://github.com/modood/modood.github.io/blob/master/articles/crypto/11-certificate.md)
+*   [『密码学应用』之公开密钥基础设施](https://github.com/modood/modood.github.io/blob/master/articles/crypto/12-public-key-infrastructure.md)
+*   [『密码学应用』之同态加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/13-homomorphic-encryption.md)
+*   [『密码学应用』之区块链应用：助记词](https://github.com/modood/modood.github.io/blob/master/articles/crypto/14-recovery-phrase.md)
+*   [『密码学应用』之区块链应用：大零币-零知识证明](https://github.com/modood/modood.github.io/blob/master/articles/crypto/15-zero-knowledge-proof.md)
 *   『密码学应用』之区块链应用：门罗币-环签名
 *   『密码学应用』之区块链应用：达世币-混币技术
 *   『密码学应用』之区块链应用：微笑币-MimbleWimble 协议

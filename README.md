@@ -34,7 +34,7 @@
 *   [『密码学应用』之消息摘要、消息认证码和数字签名](https://github.com/modood/modood.github.io/blob/master/articles/crypto/06-hash-mac-sign.md)
 *   [『密码学应用』之公钥指纹](https://github.com/modood/modood.github.io/blob/master/articles/crypto/07-public-key-fingerprint.md)
 *   [『密码学应用』之基于口令加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/08-password-based-encryption.md)
-*   [『密码学应用』之双重认证](https://github.com/modood/modood.github.io/blob/master/articles/crypto/09-two-factor-authentication.md)
+*   [『密码学应用』之双因素认证](https://github.com/modood/modood.github.io/blob/master/articles/crypto/09-two-factor-authentication.md)
 *   [『密码学应用』之二维码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/10-quick-response-code.md)
 *   [『密码学应用』之数字证书](https://github.com/modood/modood.github.io/blob/master/articles/crypto/11-certificate.md)
 *   [『密码学应用』之公开密钥基础设施](https://github.com/modood/modood.github.io/blob/master/articles/crypto/12-public-key-infrastructure.md)

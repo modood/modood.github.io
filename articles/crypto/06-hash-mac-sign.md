@@ -6,6 +6,7 @@
 * [消息摘要（Message Digest）](#消息摘要message-digest)
 * [消息认证码（Message Authentication Code, MAC）](#消息认证码messageauthenticationcodemac)
 * [数字签名（Digital Signature）](#数字签名digitalsignature)
+    * [NodeJS 生成并且检验 RSA 签名](#nodejs-生成并且检验-rsa-签名)
 
 <!-- vim-markdown-toc -->
 
@@ -57,4 +58,36 @@
 *   椭圆曲线数字签名算法（Elliptic Curve Digital Signature Algorithm，ECDSA）
     *   椭圆曲线（Elliptic curve，EC）
         *   Ed25519：爱德华曲线（Edwards Curve），专用于数字签名
+
+### NodeJS 生成并且检验 RSA 签名
+
+-   生成签名
+
+    ```js
+    /* get_signature.js */
+    var fs = require('fs');
+    var path = require('path');
+    var crypto = require('crypto');
+
+    var rsa_private_key = fs.readFileSync(path.resolve(__dirname, '../config/pem/rsa_private_key.pem'), 'utf8');
+
+    module.exports = function (raw_data) {
+      return crypto.createSign('RSA-SHA256').update(raw_data, 'utf8').sign(rsa_private_key, 'base64')
+    }
+    ```
+
+-   校验签名
+
+    ```js
+    /* verify_signature.js */
+    var fs = require('fs');
+    var path = require('path');
+    var crypto = require('crypto');
+
+    var rsa_public_key = fs.readFileSync(path.resolve(__dirname, '../config/pem/rsa_public_key.pem'), 'utf8');
+
+    module.exports = function (raw_data, signature) {
+      return crypto.createVerify('RSA-SHA256').update(raw_data, 'utf8').verify(rsa_public_key, signature, 'base64');
+    }
+    ```
 

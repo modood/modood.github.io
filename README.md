@@ -37,7 +37,7 @@
 *   [『密码学应用』之双因素认证](https://github.com/modood/modood.github.io/blob/master/articles/crypto/09-two-factor-authentication.md)
 *   [『密码学应用』之二维码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/10-quick-response-code.md)
 *   [『密码学应用』之数字证书](https://github.com/modood/modood.github.io/blob/master/articles/crypto/11-certificate.md)
-*   [『密码学应用』之公开密钥基础设施](https://github.com/modood/modood.github.io/blob/master/articles/crypto/12-public-key-infrastructure.md)
+*   ~~『密码学应用』之公开密钥基础设施~~
 *   [『密码学应用』之同态加密](https://github.com/modood/modood.github.io/blob/master/articles/crypto/13-homomorphic-encryption.md)
 *   [『密码学应用』之区块链应用：助记词](https://github.com/modood/modood.github.io/blob/master/articles/crypto/14-recovery-phrase.md)
 *   [『密码学应用』之区块链应用：大零币-零知识证明](https://github.com/modood/modood.github.io/blob/master/articles/crypto/15-zero-knowledge-proof.md)

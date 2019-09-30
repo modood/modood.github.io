@@ -3,6 +3,7 @@
 <!-- vim-markdown-toc GFM -->
 
 * [基础概述](#基础概述)
+    * [公开密钥基础设施（Public Key Infrastructure，PKI）](#公开密钥基础设施publickeyinfrastructurepki)
     * [公钥加密标准（Public Key Cryptography Standards, PKCS）](#公钥加密标准public-key-cryptography-standards-pkcs)
 * [密钥管理](#密钥管理)
     * [私钥生成](#私钥生成)
@@ -35,6 +36,45 @@
 *   国密算法 SM2：基于椭圆曲线加密算法
 
 本文主要介绍 RSA 的使用。
+
+### 公开密钥基础设施（Public Key Infrastructure，PKI）
+
+公开密钥基础设施（Public Key Infrastructure，PKI）是一种遵循标准的利用公钥加密技术为电子商务的开展提供一套安全基础平台的技术和规范。
+支持公开密钥管理并能支持认证、加密、完整性和可追究性服务的基础设施。
+
+*   签证机构（Certification Authority，CA）：负责签发证书
+*   注册机构（Registration  Authority，RA）：负责受理用户申请
+*   公钥证书（Public Key Certificate，PKC）
+
+用户只要获得其他用户的证书，就可以获得其他用户的公钥。
+公钥证书有 CA 的签名，攻击者不能伪造合法的公钥证书。
+证书不需要保密，可以在公网上分发，从而实现公钥的安全分配。
+
+**第一代 PKI 标准：**
+
+```
+RSA         公钥密码标准（Public-Key Cryptography Standards，PKCS）
+IETF        公钥基础设施 X.509（Public Key Instructure X.509，PKIX）
+ITU-T       X.509
+```
+
+**第二代 PKI 标准：**
+
+```
+Microsoft, Verisign, webMethods:
+
+XML 密钥管理规范（XML Key Management Specification，XKMS）
+*   XML密钥信息服务规范（XML Key Information  Service Specification，X-KISS）
+*   XML密钥注册服务规范（XML Key Registration Service Specification，X-KRSS）
+```
+
+**X.509 标准：**
+
+| 编码      | 后缀           | 备注                                         |
+|-----------|----------------|----------------------------------------------|
+| PKCS#12   | .P12 .PFX      | 二进制方式，私钥/公钥/证书，通常包含保护密码 |
+| X.509 DER | .DER .CER .CRT | 二进制形式，证书，不含私钥                   |
+| X.509 PAM | .PEM           | Base64 编码文本形式                          |
 
 ### 公钥加密标准（Public Key Cryptography Standards, PKCS）
 

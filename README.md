@@ -27,6 +27,7 @@
 ## 『网络编程』系列文章（2019年）
 
 *   [『网络编程』之大端模式和小端模式](https://github.com/modood/modood.github.io/blob/master/articles/network/01-bigendian-littleendian.md)
+*   [『网络编程』之 TCP 粘包](https://github.com/modood/modood.github.io/blob/master/articles/network/02-tcp-sticky-packet.md)
 
 ## 『密码学应用』系列文章（2019年）
 

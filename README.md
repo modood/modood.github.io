@@ -24,6 +24,10 @@
 
 *   [『Vim 编辑器』之快捷键映射](https://github.com/modood/modood.github.io/blob/master/articles/vim-editor/01-map.md)
 
+## 『网络编程』系列文章（2019年）
+
+*   [『网络编程』之大端模式和小端模式](https://github.com/modood/modood.github.io/blob/master/articles/network/01-bigendian-littleendian.md)
+
 ## 『密码学应用』系列文章（2019年）
 
 *   [『密码学应用』之字符编码](https://github.com/modood/modood.github.io/blob/master/articles/crypto/01-character-set.md)

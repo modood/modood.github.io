@@ -72,6 +72,7 @@
 *   [『Go 语法基础』之函数](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/04-function.md)
 *   [『Go 语法基础』之切片](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/05-slice.md)
 *   [『Go 语法基础』之映射](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/06-map.md)
+*   [『Go 语法基础』之映射（底层实现）](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/06-map-internal.md)
 *   [『Go 语法基础』之类型](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/07-type.md)
 *   [『Go 语法基础』之并发](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/08-concurrency.md)
 *   [『Go 化整为零』之文档](https://github.com/modood/modood.github.io/blob/master/articles/go-basic/09-doc.md)
